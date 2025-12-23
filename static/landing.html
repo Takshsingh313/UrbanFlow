@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanFlow | Dynamics Lab</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="landing-body">
+    <nav class="landing-nav">
+        <div class="nav-logo">
+            <span class="logo-icon">💠</span> UrbanFlow
+        </div>
+        <div class="nav-cta-container">
+            <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
+                style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; padding: 0.5rem; margin-right: 0.5rem;">☀️</button>
+            <a href="usage.html" class="nav-btn">How to Use</a>
+        </div>
+    </nav>
+    <script src="js/theme.js"></script>
+
+    <div class="hero-section">
+        <div
+            style="background: rgba(255,255,255,0.05); padding: 0.5rem 1rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem; font-size: 0.9rem; letter-spacing: 0.05em; color: var(--text-secondary); opacity: 0; animation: fadeInUp 1s ease-out forwards 0s;">
+            RESEARCH LAB v1.0
+        </div>
+
+        <h1 class="hero-title">UrbanFlow<br>Dynamics</h1>
+        <p class="hero-subtitle">
+            An advanced traffic dynamics laboratory powered by the Nagel-Schreckenberg cellular automata model. Analyze
+            flow, congestion, and emergent system behavior in real-time.
+        </p>
+
+        <a href="index.html" class="cta-button">Enter Research Lab</a>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">∑</div>
+                <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;">Mathematical
+                    Core</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+                    Built on physically rigorous stochastic models to accurately simulate driver behavior and phase
+                    transitions.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;">Real-time
+                    Telemetry</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+                    Live streaming of flow rate, density, and velocity data via high-performance WebSockets.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⌬</div>
+                <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;">Emergent
+                    Dynamics</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+                    Observe "phantom traffic jams" and other non-linear phenomena emerge naturally from local
+                    interaction rules.
+                </p>
+            </div>
+        </div>
+
+        <footer style="margin-top: auto; padding-top: 4rem; color: var(--text-tertiary); font-size: 0.8rem;">
+            &copy; 2025 UrbanFlow Research Group. All systems normal.
+        </footer>
+    </div>
