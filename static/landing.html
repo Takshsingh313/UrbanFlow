@@ -79,53 +79,88 @@
             const overlay = document.getElementById('transition-overlay');
             const targetUrl = this.href;
 
-            overlay.innerHTML = '<div class="city-container"><div class="city-grid"></div></div>';
-            const cityContainer = overlay.querySelector('.city-container');
+            overlay.innerHTML = '<div class="traffic-system"></div>';
+            const system = overlay.querySelector('.traffic-system');
 
-            overlay.classList.add('active');
+            setTimeout(() => {
+                overlay.classList.add('active');
+            }, 50);
 
-            const buildingCount = 40;
-            for (let i = 0; i < buildingCount; i++) {
-                const building = document.createElement('div');
-                building.className = 'data-building';
+            const hRoadsY = [30, 70]; 
+            const vRoadsX = [30, 70];
 
-                const height = Math.random() * 300 + 100;
-                const left = (Math.random() * 400 - 200) + '%';
-                const delay = Math.random() * 2;
-                const width = Math.random() * 40 + 20;
+            hRoadsY.forEach(top => {
+                const road = document.createElement('div');
+                road.className = 'road road-h';
+                road.style.top = `calc(${top}% - 40px)`;
+                road.innerHTML = '<div class="lane-marker"></div>';
+                system.appendChild(road);
+            });
 
-                building.style.height = height + 'px';
-                building.style.left = typeof left === 'string' ? left : '0';
-            }
+            vRoadsX.forEach(left => {
+                const road = document.createElement('div');
+                road.className = 'road road-v';
+                road.style.left = `calc(${left}% - 40px)`;
+                road.innerHTML = '<div class="lane-marker"></div>';
+                system.appendChild(road);
+            });
 
-            for (let i = 0; i < 20; i++) {
-                createBuilding(cityContainer, true);
-            }
-            // Right side
-            for (let i = 0; i < 20; i++) {
-                createBuilding(cityContainer, false);
-            }
+            hRoadsY.forEach(top => {
+                vRoadsX.forEach(left => {
+                    const signals = [
+                        { dx: -50, dy: -50 }, { dx: 35, dy: -50 },
+                        { dx: -50, dy: 35 }, { dx: 35, dy: 35 }
+                    ];
+
+                    signals.forEach((sig, index) => {
+                        const signal = document.createElement('div');
+                        signal.className = 'signal';
+                        signal.style.top = `calc(${top}% + ${sig.dy}px)`;
+                        signal.style.left = `calc(${left}% + ${sig.dx}px)`;
+
+                        signal.style.animation = `signalPulse 4s infinite ${index % 2 === 0 ? 0 : 2}s`;
+                        system.appendChild(signal);
+                    });
+                });
+            });
+
+            hRoadsY.forEach((top, rIdx) => {
+                const roadCenter = top;
+                for (let i = 0; i < 6; i++) {
+                    createVehicle(system, 'h', roadCenter, false);
+                    createVehicle(system, 'h', roadCenter, true);
+                }
+            });
+
+            vRoadsX.forEach((left, rIdx) => {
+                const roadCenter = left;
+                for (let i = 0; i < 6; i++) {
+                    createVehicle(system, 'v', roadCenter, false);
+                    createVehicle(system, 'v', roadCenter, true);
+                }
+            });
 
             setTimeout(() => {
                 window.location.href = targetUrl;
-            }, 2500);
+            }, 3000);
         });
 
-        function createBuilding(container, isLeft) {
-            const building = document.createElement('div');
-            building.className = 'data-building';
+        function createVehicle(container, type, axisPos, isReverse) {
+            const vehicle = document.createElement('div');
+            vehicle.className = `vehicle vehicle-${type} ${isReverse ? 'reverse' : ''}`;
 
-            const height = Math.random() * 400 + 100;
-            building.style.height = height + 'px';
-
-            const offset = (Math.random() * 50 + 20) * (isLeft ? -1 : 1);
-            building.style.left = `calc(50% + ${offset}%)`;
-            building.style.bottom = '-50px'; 
-
+            const duration = 2 + Math.random() * 2;
             const delay = Math.random() * 2;
-            building.style.animationDelay = delay + 's';
 
-            container.appendChild(building);
+            if (type === 'h') {
+                vehicle.style.top = `calc(${axisPos}% + ${isReverse ? 10 : -34}px)`;
+                vehicle.style.animation = `${isReverse ? 'driveLeft' : 'driveRight'} ${duration}s linear infinite ${delay}s`;
+            } else {
+                vehicle.style.left = `calc(${axisPos}% + ${isReverse ? 10 : -34}px)`;
+                vehicle.style.animation = `${isReverse ? 'driveUp' : 'driveDown'} ${duration}s linear infinite ${delay}s`;
+            }
+
+            container.appendChild(vehicle);
         }
     </script>
 </body>
