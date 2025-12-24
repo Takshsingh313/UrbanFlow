@@ -11,7 +11,8 @@
 <body class="landing-body">
     <nav class="landing-nav">
         <div class="nav-logo">
-            <span class="logo-icon">💠</span> UrbanFlow
+            <img src="images/logo.png" alt="UrbanFlow Logo" class="logo-icon"
+                style="height: 32px; width: auto; filter: invert(1);"> UrbanFlow
         </div>
         <div class="nav-cta-container">
             <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
@@ -68,3 +69,65 @@
             &copy; 2025 UrbanFlow Research Group. All systems normal.
         </footer>
     </div>
+
+    <div id="transition-overlay">
+    </div>
+
+    <script>
+        document.querySelector('.cta-button').addEventListener('click', function (e) {
+            e.preventDefault();
+            const overlay = document.getElementById('transition-overlay');
+            const targetUrl = this.href;
+
+            overlay.innerHTML = '<div class="city-container"><div class="city-grid"></div></div>';
+            const cityContainer = overlay.querySelector('.city-container');
+
+            overlay.classList.add('active');
+
+            const buildingCount = 40;
+            for (let i = 0; i < buildingCount; i++) {
+                const building = document.createElement('div');
+                building.className = 'data-building';
+
+                const height = Math.random() * 300 + 100;
+                const left = (Math.random() * 400 - 200) + '%';
+                const delay = Math.random() * 2;
+                const width = Math.random() * 40 + 20;
+
+                building.style.height = height + 'px';
+                building.style.left = typeof left === 'string' ? left : '0';
+            }
+
+            for (let i = 0; i < 20; i++) {
+                createBuilding(cityContainer, true);
+            }
+            // Right side
+            for (let i = 0; i < 20; i++) {
+                createBuilding(cityContainer, false);
+            }
+
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 2500);
+        });
+
+        function createBuilding(container, isLeft) {
+            const building = document.createElement('div');
+            building.className = 'data-building';
+
+            const height = Math.random() * 400 + 100;
+            building.style.height = height + 'px';
+
+            const offset = (Math.random() * 50 + 20) * (isLeft ? -1 : 1);
+            building.style.left = `calc(50% + ${offset}%)`;
+            building.style.bottom = '-50px'; 
+
+            const delay = Math.random() * 2;
+            building.style.animationDelay = delay + 's';
+
+            container.appendChild(building);
+        }
+    </script>
+</body>
+
+</html>
