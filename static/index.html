@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | UrbanFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="page-entry-overlay"></div>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('page-entry-overlay').classList.add('loaded');
+            }, 100);
+        });
+    </script>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-area">
+                    <h1><img src="images/logo.png" alt="UrbanFlow Logo"
+                            style="height: 28px; width: auto; margin-right: 10px; filter: invert(1);"> UrbanFlow</h1>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    Operational
+                </div>
+            </div>
+
+            <nav class="top-nav">
+                <a href="index.html" class="nav-item active">Overview</a>
+                <a href="simulation.html" class="nav-item">Simulation</a>
+                <a href="data.html" class="nav-item">Analytics</a>
+                <a href="config.html" class="nav-item">Configuration</a>
+                <a href="docs.html" class="nav-item">Documentation</a>
+
+                <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
+                    style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-primary); margin-left: 0.5rem;">☀️</button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="view-container" style="padding: 3rem; max-width: 1400px; margin: 0 auto; width: 100%;">
+                <h2 style="font-weight: 300; font-size: 2rem; margin-bottom: 2rem;">System Status</h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+
+                    <div class="glass-panel">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h3
+                                    style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: 0.5rem;">
+                                    Network State</h3>
+                                <div
+                                    style="font-size: 2rem; font-weight: 500; color: var(--text-primary); font-family: var(--font-display);">
+                                    Active</div>
+                            </div>
+                            <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">The traffic graph is initialized and ready for
+                            simulation.</p>
+                    </div>
+
+                    <div class="glass-panel">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h3
+                                    style="font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: 0.5rem;">
+                                    Congestion Index</h3>
+                                <div
+                                    style="font-size: 2rem; font-weight: 500; color: var(--text-primary); font-family: var(--font-display);">
+                                    0.00</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">Relative density of agents across the topology.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel"
+                        style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <h2 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Simulation Control</h2>
+                            <p>Launch the physics engine to begin data collection.</p>
+                        </div>
+                        <a href="simulation.html" class="cyber-btn" style="text-decoration: none;">Open Simulation
+                            Interface &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/theme.js"></script>
+</body>
+
+</html>
