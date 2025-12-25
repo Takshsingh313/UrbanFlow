@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>How to Use | UrbanFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="page-entry-overlay"></div>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('page-entry-overlay').classList.add('loaded');
+            }, 100);
+        });
+    </script>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-area">
+                    <h1><img src="images/logo.png" alt="UrbanFlow Logo"
+                            style="height: 28px; width: auto; margin-right: 10px; filter: invert(1);"> UrbanFlow</h1>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    User Guide
+                </div>
+            </div>
+
+            <nav class="top-nav">
+                <a href="index.html" class="nav-item">Overview</a>
+                <a href="simulation.html" class="nav-item">Simulation</a>
+                <a href="data.html" class="nav-item">Analytics</a>
+                <a href="config.html" class="nav-item">Configuration</a>
+                <a href="docs.html" class="nav-item">Documentation</a>
+                <a href="usage.html" class="nav-item active">User Guide</a>
+
+                <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
+                    style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-primary); margin-left: 0.5rem;">☀️</button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="view-container" style="padding: 2rem; max-width: 1400px; margin: 0 auto; width: 100%;">
+                <h1 style="font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 600;">
+                    How to Use UrbanFlow
+                </h1>
+                <p
+                    style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 3rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 2rem;">
+                    A quick start guide to operating the simulation and interpreting real-time data.
+                </p>
+
+                <div style="display: grid; gap: 2rem;">
+                    <section class="glass-panel">
+                        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                            <div
+                                style="background: var(--accent-primary); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
+                                1</div>
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Start the Simulation</h3>
+                                <p>Navigate to the <strong>Simulation</strong> tab. The canvas will initialize empty.
+                                    Use
+                                    the
+                                    <span
+                                        style="background: rgba(255,255,255,0.1); padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 600; font-size: 0.8rem;">Start</span>
+                                    control in the top right to begin the traffic flow.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="glass-panel">
+                        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                            <div
+                                style="background: var(--text-tertiary); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
+                                2</div>
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Adjust Parameters</h3>
+                                <p>On the <strong>Configuration</strong> page, you can modify:</p>
+                                <ul
+                                    style="margin-top: 0.5rem; margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.6;">
+                                    <li><strong>Car Density:</strong> Initial number of vehicles.</li>
+                                    <li><strong>Slow Probability:</strong> Chance of random braking (0.0 - 1.0).</li>
+                                    <li><strong>Lane Speed:</strong> Maximum velocity caps.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="glass-panel">
+                        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                            <div
+                                style="background: var(--text-tertiary); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
+                                3</div>
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Analyze Telemetry</h3>
+                                <p>Switch to the <strong>Analytics</strong> tab to view real-time graphs:</p>
+                                <ul
+                                    style="margin-top: 0.5rem; margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.6;">
+                                    <li><strong>Flow Rate:</strong> Cars per minute passing a point.</li>
+                                    <li><strong>Avg Velocity:</strong> System-wide speed trends.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div style="margin-top: 4rem; text-align: center;">
+                    <a href="simulation.html" class="cyber-btn"
+                        style="text-decoration: none; display: inline-block; padding: 1rem 3rem;">
+                        Start Experimenting &rarr;
+                    </a>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <script src="js/theme.js"></script>
+</body>
+
+</html>
