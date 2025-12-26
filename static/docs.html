@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation | UrbanFlow</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div id="page-entry-overlay"></div>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('page-entry-overlay').classList.add('loaded');
+            }, 100);
+        });
+    </script>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-area">
+                    <h1><img src="images/logo.png" alt="UrbanFlow Logo"
+                            style="height: 28px; width: auto; margin-right: 10px; filter: invert(1);"> UrbanFlow</h1>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    Knowledge Base
+                </div>
+            </div>
+
+            <nav class="top-nav">
+                <a href="index.html" class="nav-item">Overview</a>
+                <a href="simulation.html" class="nav-item">Simulation</a>
+                <a href="data.html" class="nav-item">Analytics</a>
+                <a href="config.html" class="nav-item">Configuration</a>
+                <a href="docs.html" class="nav-item active">Documentation</a>
+
+                <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
+                    style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-primary); margin-left: 0.5rem;">☀️</button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="view-container" style="padding: 2rem; max-width: 1400px; margin: 0 auto; width: 100%;">
+                <h1 style="font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 600;">
+                    Nagel-Schreckenberg Model</h1>
+                <p
+                    style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 3rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 2rem;">
+                    A theoretical definition for the stochastic cellular automata used in this simulation.
+                </p>
+
+                <section style="margin-bottom: 3rem;">
+                    <h2>Abstract</h2>
+                    <p class="glass-panel"
+                        style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.1);">
+                        The Nagel-Schreckenberg (NaSch) model is a discrete model for traffic flow simulation.
+                        Its capability to reproduce traffic jams without external bottlenecks makes it a valuable tool
+                        in
+                        urban dynamics research.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Ruleset</h2>
+                    <p style="margin-bottom: 1.5rem;">For each vehicle $i$ at position $x$, velocity $v$, and gap $d$ to
+                        the next vehicle, the following rules update state $t \to t+1$:</p>
+
+                    <div class="glass-panel">
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 1.5rem;">
+                            <li>
+                                <strong
+                                    style="display: block; color: var(--text-primary); margin-bottom: 0.5rem; font-family: var(--font-display);">1.
+                                    Acceleration</strong>
+                                <span
+                                    style="font-family: 'Courier New', monospace; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; border-radius: 4px;">$v
+                                    \leftarrow \min(v + 1, v_{max})$</span>
+                                <div style="margin-top: 0.5rem; font-size: 0.9rem;">Drivers want to reach the speed
+                                    limit.</div>
+                            </li>
+                            <li>
+                                <strong
+                                    style="display: block; color: var(--text-primary); margin-bottom: 0.5rem; font-family: var(--font-display);">2.
+                                    Deceleration (Safety)</strong>
+                                <span
+                                    style="font-family: 'Courier New', monospace; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; border-radius: 4px;">$v
+                                    \leftarrow \min(v, d)$</span>
+                                <div style="margin-top: 0.5rem; font-size: 0.9rem;">Drivers brake to avoid collision.
+                                </div>
+                            </li>
+                            <li>
+                                <strong
+                                    style="display: block; color: var(--text-primary); margin-bottom: 0.5rem; font-family: var(--font-display);">3.
+                                    Randomization</strong>
+                                <span
+                                    style="font-family: 'Courier New', monospace; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; border-radius: 4px;">With
+                                    probability $p$, $v \leftarrow \max(v - 1, 0)$</span>
+                                <div style="margin-top: 0.5rem; font-size: 0.9rem;">Models distraction or over-braking.
+                                </div>
+                            </li>
+                            <li>
+                                <strong
+                                    style="display: block; color: var(--text-primary); margin-bottom: 0.5rem; font-family: var(--font-display);">4.
+                                    Update Position</strong>
+                                <span
+                                    style="font-family: 'Courier New', monospace; background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; border-radius: 4px;">$x
+                                    \leftarrow x + v$</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+    <script src="js/theme.js"></script>
+</body>
+
+</html>
