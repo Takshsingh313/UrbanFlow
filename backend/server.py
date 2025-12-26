@@ -22,7 +22,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 async def read_index():
-    return FileResponse('static/simulation.html')
+    return FileResponse('static/landing.html')
 
 model = SimulationModel()
 model.create_city_grid() 
