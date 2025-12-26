@@ -59,14 +59,17 @@
                                 style="background: var(--accent-primary); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
                                 1</div>
                             <div>
-                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Start the Simulation</h3>
-                                <p>Navigate to the <strong>Simulation</strong> tab. The canvas will initialize empty.
-                                    Use
-                                    the
-                                    <span
-                                        style="background: rgba(255,255,255,0.1); padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 600; font-size: 0.8rem;">Start</span>
-                                    control in the top right to begin the traffic flow.
-                                </p>
+                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Choose Your Map</h3>
+                                <p style="margin-bottom: 0.5rem;">You have three ways to set up the city:</p>
+                                <ul
+                                    style="margin-top: 0.5rem; margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.6;">
+                                    <li><strong>Real World Map:</strong> Click "Select Area" to choose a real-world
+                                        location using the interactive map.</li>
+                                    <li><strong>City Layouts:</strong> Select a preset like Manhattan or Roundabout from
+                                        the dropdown.</li>
+                                    <li><strong>Grid Generator:</strong> Use the sliders to create a custom grid of any
+                                        size.</li>
+                                </ul>
                             </div>
                         </div>
                     </section>
@@ -77,13 +80,14 @@
                                 style="background: var(--text-tertiary); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
                                 2</div>
                             <div>
-                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Adjust Parameters</h3>
-                                <p>On the <strong>Configuration</strong> page, you can modify:</p>
+                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Control Simulation</h3>
+                                <p>Use the control panel on the right sidebar:</p>
                                 <ul
                                     style="margin-top: 0.5rem; margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.6;">
-                                    <li><strong>Car Density:</strong> Initial number of vehicles.</li>
-                                    <li><strong>Slow Probability:</strong> Chance of random braking (0.0 - 1.0).</li>
-                                    <li><strong>Lane Speed:</strong> Maximum velocity caps.</li>
+                                    <li><strong>Start/Halt:</strong> Begin or pause the simulation.</li>
+                                    <li><strong>Reset:</strong> Clear all vehicles (keeps the map).</li>
+                                    <li><strong>Spawn Rate:</strong> Adjust how frequently new cars appear.</li>
+                                    <li><strong>Light Timing:</strong> Speed up or slow down traffic light cycles.</li>
                                 </ul>
                             </div>
                         </div>
@@ -95,12 +99,14 @@
                                 style="background: var(--text-tertiary); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
                                 3</div>
                             <div>
-                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Analyze Telemetry</h3>
-                                <p>Switch to the <strong>Analytics</strong> tab to view real-time graphs:</p>
+                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Analyze Data</h3>
+                                <p>Monitor real-time telemetry in the sidebar or switch to the
+                                    <strong>Analytics</strong> tab for detailed breakdowns:</p>
                                 <ul
                                     style="margin-top: 0.5rem; margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.6;">
-                                    <li><strong>Flow Rate:</strong> Cars per minute passing a point.</li>
-                                    <li><strong>Avg Velocity:</strong> System-wide speed trends.</li>
+                                    <li><strong>Flow Rate:</strong> Vehicles per tick passing through the system.</li>
+                                    <li><strong>Avg Speed:</strong> Global average velocity of all active cars.</li>
+                                    <li><strong>Density:</strong> Current congestion levels.</li>
                                 </ul>
                             </div>
                         </div>
