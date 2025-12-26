@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Simulation | UrbanFlow</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -21,7 +21,7 @@
         <header class="app-header">
             <div class="header-left">
                 <div class="logo-area">
-                    <h1><img src="images/logo.png" alt="UrbanFlow Logo"
+                    <h1><img src="/static/images/logo.png" alt="UrbanFlow Logo"
                             style="height: 28px; width: auto; margin-right: 10px; filter: invert(1);"> UrbanFlow</h1>
                 </div>
                 <div class="status-indicator">
@@ -98,7 +98,7 @@
                         </div>
                         <div>
                             <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Active
-                                Since</div>
+                                Vehicles</div>
                             <div id="stat-vehicles" style="font-family: var(--font-display); font-size: 1.5rem;">0</div>
                         </div>
                     </div>
@@ -161,29 +161,7 @@
                         </div>
                     </div>
 
-                    <div
-                        style="display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: 12px; border: 1px solid var(--border-subtle); align-items: end;">
-                        <div>
-                            <label
-                                style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
-                                City Layout Template
-                            </label>
-                            <select id="city-layout-select"
-                                style="width: 100%; padding: 0.75rem; background: var(--bg-tertiary); border: 1px solid var(--border-subtle); border-radius: 6px; color: var(--text-primary);">
-                                <option value="manhattan" data-type="pattern">Standard</option>
-                                <option value="roundabout" data-type="pattern">Traffic Circle</option>
-                                <option value="t_intersection" data-type="pattern">T-Intersection</option>
-                                <option value="times_square.json" data-type="json">NYC Times Square Pattern</option>
-                                <option value="paris_roundabout.json" data-type="json">Paris Arc de Triomphe</option>
-                                <option value="tokyo_shibuya.json" data-type="json">Tokyo Shibuya Crossing</option>
-                            </select>
-                        </div>
-                        <div>
-                            <button onclick="loadCityLayout()" class="cyber-btn">
-                                Load City Map
-                            </button>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div id="controls-realworld" style="display: none;">
@@ -284,10 +262,10 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="js/visualizer.js"></script>
-    <script src="js/charts.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/theme.js"></script>
+    <script src="/static/js/visualizer.js"></script>
+    <script src="/static/js/charts.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/theme.js"></script>
 </body>
 
 </html>
