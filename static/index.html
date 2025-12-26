@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | UrbanFlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body>
+    <div id="page-entry-overlay"></div>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('page-entry-overlay').classList.add('loaded');
+            }, 100);
+        });
+    </script>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-area">
+                    <h1><img src="{{ url_for('static', path='images/logo.png') }}" alt="UrbanFlow Logo"
+                            style="height: 28px; width: auto; margin-right: 10px; filter: invert(1);"> UrbanFlow</h1>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    Operational
+                </div>
+            </div>
+
+            <nav class="top-nav">
+                <a href="{{ url_for('read_index') }}" class="nav-item active">Overview</a>
+                <a href="{{ url_for('read_simulation') }}" class="nav-item">Simulation</a>
+                <a href="{{ url_for('read_data') }}" class="nav-item">Analytics</a>
+                <a href="{{ url_for('read_config') }}" class="nav-item">Configuration</a>
+                <a href="{{ url_for('read_docs') }}" class="nav-item">Documentation</a>
+
+                <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
+                    style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-primary); margin-left: 0.5rem;">☀️</button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="view-container" style="padding: 3rem; max-width: 1400px; margin: 0 auto; width: 100%;">
+                <h2 style="font-weight: 300; font-size: 2rem; margin-bottom: 2rem;">System Status</h2>
+
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                    <div class="glass-panel">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h3
+                                    style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: 0.5rem;">
+                                    Network State</h3>
+                                <div
+                                    style="font-size: 2rem; font-weight: 500; color: var(--text-primary); font-family: var(--font-display);">
+                                    Active</div>
+                            </div>
+                            <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">The traffic graph is initialized and ready for
+                            simulation.</p>
+                    </div>
+
+                    <div class="glass-panel">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h3
+                                    style="font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: 0.5rem;">
+                                    Congestion Index</h3>
+                                <div
+                                    style="font-size: 2rem; font-weight: 500; color: var(--text-primary); font-family: var(--font-display);">
+                                    0.00</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">Relative density of agents across the topology.
+                        </p>
+                    </div>
+                </div>
+
+                <h2 style="font-weight: 300; font-size: 2rem; margin-bottom: 2rem;">Start Simulation</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                    <div class="glass-panel hover-card"
+                        style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border-subtle); transition: all 0.3s ease; padding: 2.5rem;">
+                        <div>
+                            <div class="grayscale-hover-icon" style="font-size: 3rem; margin-bottom: 1.5rem;">🏗️</div>
+                            <h2 style="margin-bottom: 0.75rem; font-size: 1.5rem;">Synthetic Layouts</h2>
+                            <p
+                                style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1rem; line-height: 1.6;">
+                                Design custom traffic grids or load predefined patterns like Roundabouts. Perfect for
+                                controlled experiments.
+                            </p>
+                        </div>
+                        <a href="{{ url_for('read_simulation') }}?mode=manual" class="cyber-btn"
+                            style="text-decoration: none; text-align: center; font-size: 1.1rem; padding: 1rem;">Enter
+                            Simulation &rarr;</a>
+                    </div>
+
+                    <div class="glass-panel hover-card"
+                        style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border-subtle); transition: all 0.3s ease; padding: 2.5rem;">
+                        <div>
+                            <div class="grayscale-hover-icon" style="font-size: 3rem; margin-bottom: 1.5rem;">🌍</div>
+                            <h2 style="margin-bottom: 0.75rem; font-size: 1.5rem;">Real World Map</h2>
+                            <p
+                                style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1rem; line-height: 1.6;">
+                                Import real road networks from OpenStreetMap. Simulate traffic on any intersection on
+                                Earth.
+                            </p>
+                        </div>
+                        <a href="{{ url_for('read_simulation') }}?mode=realworld" class="cyber-btn"
+                            style="text-decoration: none; text-align: center; font-size: 1.1rem; padding: 1rem;">Enter
+                            Simulation &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', path='js/theme.js') }}"></script>
+</body>
+
+</html>

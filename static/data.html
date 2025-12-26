@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics | UrbanFlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div id="page-entry-overlay"></div>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('page-entry-overlay').classList.add('loaded');
+            }, 100);
+        });
+    </script>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-area">
+                    <h1><img src="{{ url_for('static', path='images/logo.png') }}" alt="UrbanFlow Logo"
+                            style="height: 28px; width: auto; margin-right: 10px; filter: invert(1);"> UrbanFlow</h1>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    Real-time Analytics
+                </div>
+            </div>
+
+            <nav class="top-nav">
+                <a href="{{ url_for('read_index') }}" class="nav-item">Overview</a>
+                <a href="{{ url_for('read_simulation') }}" class="nav-item">Simulation</a>
+                <a href="{{ url_for('read_data') }}" class="nav-item active">Analytics</a>
+                <a href="{{ url_for('read_config') }}" class="nav-item">Configuration</a>
+                <a href="{{ url_for('read_docs') }}" class="nav-item">Documentation</a>
+
+                <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
+                    style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-primary); margin-left: 0.5rem;">☀️</button>
+            </nav>
+        </header>
+
+        <main class="main-content" style="overflow-y: auto;">
+            <div class="view-container"
+                style="padding: 2rem; max-width: 1600px; margin: 0 auto; width: 100%; padding-bottom: 4rem;">
+
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div class="glass-panel" style="padding: 1.5rem;">
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Average
+                            Velocity</div>
+                        <div id="stat-velocity"
+                            style="font-family: var(--font-display); font-size: 2rem; color: var(--accent-primary);">
+                            0.00</div>
+                        <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 0.25rem;">cells/tick
+                        </div>
+                    </div>
+                    <div class="glass-panel" style="padding: 1.5rem;">
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Flow Rate
+                        </div>
+                        <div id="stat-flow-rate"
+                            style="font-family: var(--font-display); font-size: 2rem; color: var(--accent-primary);">
+                            0.000</div>
+                        <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 0.25rem;">vehicles/tick
+                        </div>
+                    </div>
+                    <div class="glass-panel" style="padding: 1.5rem;">
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Vehicle
+                            Density</div>
+                        <div id="stat-density"
+                            style="font-family: var(--font-display); font-size: 2rem; color: var(--accent-primary);">
+                            0.000</div>
+                        <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 0.25rem;">vehicles/cell
+                        </div>
+                    </div>
+                    <div class="glass-panel" style="padding: 1.5rem;">
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Active
+                            Vehicles</div>
+                        <div id="stat-vehicles"
+                            style="font-family: var(--font-display); font-size: 2rem; color: var(--accent-primary);">0
+                        </div>
+                        <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 0.25rem;">in simulation
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; gap: 2rem; grid-template-columns: repeat(2, 1fr); margin-bottom: 2rem;">
+                    <div class="glass-panel" style="display: flex; flex-direction: column; padding: 1.5rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h2 style="margin: 0; font-size: 1.1rem;">Average Velocity Over Time</h2>
+                            <button onclick="downloadChart('chart-velocity', 'Velocity_Chart')" class="nav-btn"
+                                style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Download</button>
+                        </div>
+                        <div style="flex: 1; min-height: 280px;">
+                            <canvas id="chart-velocity"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-panel" style="display: flex; flex-direction: column; padding: 1.5rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h2 style="margin: 0; font-size: 1.1rem;">Flow Rate Over Time</h2>
+                            <button onclick="downloadChart('chart-flow', 'Flow_Rate_Chart')" class="nav-btn"
+                                style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Download</button>
+                        </div>
+                        <div style="flex: 1; min-height: 280px;">
+                            <canvas id="chart-flow"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; gap: 2rem; grid-template-columns: repeat(2, 1fr);">
+                    <div class="glass-panel" style="display: flex; flex-direction: column; padding: 1.5rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h2 style="margin: 0; font-size: 1.1rem;">Vehicle Count Over Time</h2>
+                            <button onclick="downloadChart('chart-vehicles', 'Vehicle_Count_Chart')" class="nav-btn"
+                                style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Download</button>
+                        </div>
+                        <div style="flex: 1; min-height: 280px;">
+                            <canvas id="chart-vehicles"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-panel" style="display: flex; flex-direction: column; padding: 1.5rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h2 style="margin: 0; font-size: 1.1rem;">Density Over Time</h2>
+                            <button onclick="downloadChart('chart-density', 'Density_Chart')" class="nav-btn"
+                                style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Download</button>
+                        </div>
+                        <div style="flex: 1; min-height: 280px;">
+                            <canvas id="chart-density"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', path='js/charts.js') }}"></script>
+    <script src="{{ url_for('static', path='js/main.js') }}"></script>
+    <script src="{{ url_for('static', path='js/theme.js') }}"></script>
+</body>
+
+</html>

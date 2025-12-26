@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simulation | UrbanFlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div id="page-entry-overlay"></div>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('page-entry-overlay').classList.add('loaded');
+            }, 100);
+        });
+    </script>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-area">
+                    <h1><img src="{{ url_for('static', path='images/logo.png') }}" alt="UrbanFlow Logo"
+                            style="height: 28px; width: auto; margin-right: 10px; filter: invert(1);"> UrbanFlow</h1>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    Real-time Physics
+                </div>
+            </div>
+
+            <nav class="top-nav">
+                <a href="{{ url_for('read_index') }}" class="nav-item">Overview</a>
+                <a href="{{ url_for('read_simulation') }}" class="nav-item active">Simulation</a>
+                <a href="{{ url_for('read_data') }}" class="nav-item">Analytics</a>
+                <a href="{{ url_for('read_config') }}" class="nav-item">Configuration</a>
+                <a href="{{ url_for('read_docs') }}" class="nav-item">Documentation</a>
+
+                <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
+                    style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-primary); margin-left: 0.5rem;">☀️</button>
+            </nav>
+        </header>
+
+        <main class="main-content" style="overflow-y: auto;">
+            <div id="mode-selection-screen" class="view-container"
+                style="padding: 4rem; max-width: 1200px; margin: 0 auto; width: 100%; text-align: center;">
+                <h1
+                    style="font-size: 2.5rem; margin-bottom: 3rem; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Choose Simulation Mode</h1>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div onclick="selectMode('manual')" class="glass-panel hover-card"
+                        style="padding: 3rem; cursor: pointer; transition: all 0.3s ease; border: 1px solid var(--border-subtle);">
+                        <div class="grayscale-hover-icon" style="font-size: 3rem; margin-bottom: 1.5rem;">🏗️</div>
+                        <h2 style="margin-bottom: 1rem;">Synthetic Layouts</h2>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">
+                            Design custom traffic grids or load predefined patterns like Roundabouts and
+                            T-Intersections.
+                            Perfect for controlled experiments.
+                        </p>
+                        <button class="cyber-btn" style="margin-top: 2rem; width: 100%;">Enter Simulation</button>
+                    </div>
+
+                    <div onclick="selectMode('realworld')" class="glass-panel hover-card"
+                        style="padding: 3rem; cursor: pointer; transition: all 0.3s ease; border: 1px solid var(--border-subtle);">
+                        <div class="grayscale-hover-icon" style="font-size: 3rem; margin-bottom: 1.5rem;">🌍</div>
+                        <h2 style="margin-bottom: 1rem;">Real World Map</h2>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">
+                            Import real road networks from OpenStreetMap. Simulate traffic on any intersection on Earth.
+                        </p>
+                        <button class="cyber-btn" style="margin-top: 2rem; width: 100%;">Enter
+                            Simulation</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="simulation-workspace" class="view-container"
+                style="display: none; padding: 2rem; max-width: 1400px; margin: 0 auto; width: 100%; flex-direction: column; gap: 2rem; padding-bottom: 3rem;">
+
+                <button
+                    onclick="sessionStorage.removeItem('urbanflow_mode'); window.location.href='{{ url_for('read_index') }}'"
+                    style="background: none; border: none; color: var(--text-tertiary); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; align-self: flex-start; margin-bottom: -1rem; z-index: 10;">
+                    &larr; Back to Dashboard
+                </button>
+
+                <div
+                    style="display: flex; justify-content: space-between; align-items: end; padding-bottom: 1rem; border-bottom: 1px solid var(--border-subtle);">
+                    <div style="display: flex; gap: 2rem;">
+                        <div>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Flow
+                                Rate</div>
+                            <div id="stat-flow" style="font-family: var(--font-display); font-size: 1.5rem;">0.00</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Avg
+                                Velocity</div>
+                            <div id="stat-speed" style="font-family: var(--font-display); font-size: 1.5rem;">0.00</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Active
+                                Vehicles</div>
+                            <div id="stat-vehicles" style="font-family: var(--font-display); font-size: 1.5rem;">0</div>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="btn-start" onclick="toggleSimulation()" class="cyber-btn">Start Simulation</button>
+                    </div>
+                </div>
+
+                <div id="controls-manual">
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: 12px; border: 1px solid var(--border-subtle); margin-bottom: 1.5rem;">
+                        <div>
+                            <label
+                                style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                Grid Rows: <span id="grid-rows-value">4</span>
+                            </label>
+                            <input type="range" id="grid-rows-slider" min="2" max="6" value="4"
+                                style="width: 100%; accent-color: var(--accent-primary);">
+                        </div>
+                        <div>
+                            <label
+                                style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                Grid Columns: <span id="grid-cols-value">4</span>
+                            </label>
+                            <input type="range" id="grid-cols-slider" min="2" max="6" value="4"
+                                style="width: 100%; accent-color: var(--accent-primary);">
+                        </div>
+                        <div>
+                            <label
+                                style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                Initial Vehicles: <span id="initial-vehicles-value">8</span>
+                            </label>
+                            <input type="range" id="initial-vehicles-slider" min="0" max="50" value="8"
+                                style="width: 100%; accent-color: var(--accent-primary);">
+                        </div>
+                        <div>
+                            <label
+                                style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                Car Spawn Rate: <span id="spawn-rate-value">5%</span>
+                            </label>
+                            <input type="range" id="spawn-rate-slider" min="0" max="20" value="5"
+                                style="width: 100%; accent-color: var(--accent-primary);">
+                        </div>
+                        <div>
+                            <label
+                                style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                Traffic Light Duration: <span id="light-timing-value">30 ticks</span>
+                            </label>
+                            <input type="range" id="light-timing-slider" min="10" max="60" value="30"
+                                style="width: 100%; accent-color: var(--accent-primary);">
+                        </div>
+                        <div style="display: flex; gap: 0.75rem; align-items: end;">
+                            <button id="btn-regenerate" onclick="regenerateGrid()" class="cyber-btn" style="flex: 1;">
+                                Regenerate Grid
+                            </button>
+                            <button id="btn-reset" onclick="resetSimulation()" class="cyber-btn"
+                                style="flex: 1; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-secondary);">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div id="controls-realworld" style="display: none;">
+                    <div
+                        style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="margin: 0; font-size: 1.1rem;">Select Custom Area from Map</h3>
+                            <p style="margin: 0.5rem 0 0; color: var(--text-secondary); font-size: 0.9rem;">Choose any
+                                location on Earth to simulate traffic from real roads.</p>
+                        </div>
+                        <button onclick="openMapSelector()" class="cyber-btn"
+                            style="background: #3b82f6; border-color: #3b82f6;">
+                            <span style="margin-right: 8px;">🌍</span> Open World Map
+                        </button>
+                    </div>
+                </div>
+
+                <div class="simulation-view"
+                    style="flex: 1; min-height: 500px; background: #000; border-radius: 12px; border: 1px solid var(--border-subtle); overflow: hidden; position: relative;">
+                    <canvas id="sim-canvas"></canvas>
+                </div>
+            </div>
+
+            <script>
+                function selectMode(mode) {
+                    sessionStorage.setItem('urbanflow_mode', mode);
+
+                    document.getElementById('mode-selection-screen').style.display = 'none';
+                    document.getElementById('simulation-workspace').style.display = 'flex';
+
+                    if (mode === 'manual') {
+                        document.getElementById('controls-manual').style.display = 'block';
+                        document.getElementById('controls-realworld').style.display = 'none';
+                        if (window.regenerateGrid) setTimeout(window.regenerateGrid, 100);
+                    } else {
+                        document.getElementById('controls-manual').style.display = 'none';
+                        document.getElementById('controls-realworld').style.display = 'block';
+                    }
+                }
+
+                window.addEventListener('load', () => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const mode = urlParams.get('mode');
+                    const savedMode = sessionStorage.getItem('urbanflow_mode');
+
+                    if (mode === 'manual' || mode === 'realworld') {
+                        selectMode(mode);
+                    } else if (savedMode) {
+                        selectMode(savedMode);
+                    }
+                });
+            </script>
+        </main>
+    </div>
+
+    <div id="map-modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);">
+        <div
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; background: var(--bg-primary); border-radius: 16px; border: 1px solid var(--border-subtle); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+            <div
+                style="padding: 1rem 1.5rem; background: var(--bg-secondary); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="margin: 0;">Select Area for Simulation</h3>
+                <button onclick="closeMapSelector()"
+                    style="background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+
+            <div style="position: relative; flex: 1;">
+                <div id="leaflet-map" style="width: 100%; height: 100%;"></div>
+
+                <div
+                    style="position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; pointer-events: none;">
+                    <div
+                        style="background: rgba(0,0,0,0.8); color: white; padding: 0.75rem 1.5rem; border-radius: 50px; pointer-events: auto; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                        Move map to desired location<br>
+                        <span style="font-size: 0.8rem; opacity: 0.8;">The visible area will be simulated</span>
+                    </div>
+                </div>
+
+                <div
+                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; border: 2px dashed #ffffff; box-shadow: 0 0 0 9999px rgba(0,0,0,0.5); pointer-events: none; z-index: 999; display: flex; align-items: center; justify-content: center;">
+                    <span
+                        style="background: rgba(0,0,0,0.7); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">Simulation
+                        Area</span>
+                </div>
+            </div>
+
+            <div
+                style="padding: 1rem 1.5rem; background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); display: flex; justify-content: flex-end; gap: 1rem;">
+                <button onclick="closeMapSelector()" class="cyber-btn"
+                    style="background: var(--bg-tertiary);">Cancel</button>
+                <button onclick="confirmMapSelection()" class="cyber-btn"
+                    style="background: #22c55e; border-color: #22c55e;">Generate Simulation from this Area</button>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="{{ url_for('static', path='js/visualizer.js') }}"></script>
+    <script src="{{ url_for('static', path='js/charts.js') }}"></script>
+    <script src="{{ url_for('static', path='js/main.js') }}"></script>
+    <script src="{{ url_for('static', path='js/theme.js') }}"></script>
+</body>
+
+</html>

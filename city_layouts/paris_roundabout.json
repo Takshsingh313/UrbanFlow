@@ -1,0 +1,165 @@
+{
+    "name": "Arc de Triomphe Roundabout (Paris)",
+    "description": "Famous roundabout in Paris with 12 exits",
+    "intersections": [
+        {
+            "id": "center_0",
+            "x": 450,
+            "y": 300,
+            "type": "yield"
+        },
+        {
+            "id": "center_1",
+            "x": 520,
+            "y": 330,
+            "type": "yield"
+        },
+        {
+            "id": "center_2",
+            "x": 550,
+            "y": 400,
+            "type": "yield"
+        },
+        {
+            "id": "center_3",
+            "x": 520,
+            "y": 470,
+            "type": "yield"
+        },
+        {
+            "id": "center_4",
+            "x": 450,
+            "y": 500,
+            "type": "yield"
+        },
+        {
+            "id": "center_5",
+            "x": 380,
+            "y": 470,
+            "type": "yield"
+        },
+        {
+            "id": "center_6",
+            "x": 350,
+            "y": 400,
+            "type": "yield"
+        },
+        {
+            "id": "center_7",
+            "x": 380,
+            "y": 330,
+            "type": "yield"
+        },
+        {
+            "id": "exit_0",
+            "x": 450,
+            "y": 150,
+            "type": "entry"
+        },
+        {
+            "id": "exit_1",
+            "x": 600,
+            "y": 250,
+            "type": "entry"
+        },
+        {
+            "id": "exit_2",
+            "x": 600,
+            "y": 550,
+            "type": "entry"
+        },
+        {
+            "id": "exit_3",
+            "x": 300,
+            "y": 550,
+            "type": "entry"
+        }
+    ],
+    "roads": [
+        {
+            "from": "center_0",
+            "to": "center_1",
+            "lanes": 1
+        },
+        {
+            "from": "center_1",
+            "to": "center_2",
+            "lanes": 1
+        },
+        {
+            "from": "center_2",
+            "to": "center_3",
+            "lanes": 1
+        },
+        {
+            "from": "center_3",
+            "to": "center_4",
+            "lanes": 1
+        },
+        {
+            "from": "center_4",
+            "to": "center_5",
+            "lanes": 1
+        },
+        {
+            "from": "center_5",
+            "to": "center_6",
+            "lanes": 1
+        },
+        {
+            "from": "center_6",
+            "to": "center_7",
+            "lanes": 1
+        },
+        {
+            "from": "center_7",
+            "to": "center_0",
+            "lanes": 1
+        },
+        {
+            "from": "exit_0",
+            "to": "center_0",
+            "lanes": 1
+        },
+        {
+            "from": "center_0",
+            "to": "exit_0",
+            "lanes": 1
+        },
+        {
+            "from": "exit_1",
+            "to": "center_2",
+            "lanes": 1
+        },
+        {
+            "from": "center_2",
+            "to": "exit_1",
+            "lanes": 1
+        },
+        {
+            "from": "exit_2",
+            "to": "center_4",
+            "lanes": 1
+        },
+        {
+            "from": "center_4",
+            "to": "exit_2",
+            "lanes": 1
+        },
+        {
+            "from": "exit_3",
+            "to": "center_6",
+            "lanes": 1
+        },
+        {
+            "from": "center_6",
+            "to": "exit_3",
+            "lanes": 1
+        }
+    ],
+    "traffic_patterns": {
+        "spawn_rate": 0.06,
+        "green_duration": 0,
+        "yellow_duration": 0
+    }
+}

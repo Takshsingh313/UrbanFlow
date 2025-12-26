@@ -1,0 +1,187 @@
+{
+    "name": "Times Square Intersection (Simplified)",
+    "description": "Simplified version of Times Square, NYC - Broadway and 7th Avenue intersection",
+    "intersections": [
+        {
+            "id": "A1",
+            "x": 200,
+            "y": 150,
+            "type": "signalized"
+        },
+        {
+            "id": "A2",
+            "x": 350,
+            "y": 150,
+            "type": "signalized"
+        },
+        {
+            "id": "A3",
+            "x": 500,
+            "y": 150,
+            "type": "signalized"
+        },
+        {
+            "id": "B1",
+            "x": 200,
+            "y": 300,
+            "type": "signalized"
+        },
+        {
+            "id": "B2",
+            "x": 350,
+            "y": 300,
+            "type": "signalized"
+        },
+        {
+            "id": "B3",
+            "x": 500,
+            "y": 300,
+            "type": "signalized"
+        },
+        {
+            "id": "C1",
+            "x": 200,
+            "y": 450,
+            "type": "signalized"
+        },
+        {
+            "id": "C2",
+            "x": 350,
+            "y": 450,
+            "type": "signalized"
+        },
+        {
+            "id": "C3",
+            "x": 500,
+            "y": 450,
+            "type": "signalized"
+        }
+    ],
+    "roads": [
+        {
+            "from": "A1",
+            "to": "A2",
+            "lanes": 2
+        },
+        {
+            "from": "A2",
+            "to": "A1",
+            "lanes": 2
+        },
+        {
+            "from": "A2",
+            "to": "A3",
+            "lanes": 2
+        },
+        {
+            "from": "A3",
+            "to": "A2",
+            "lanes": 2
+        },
+        {
+            "from": "B1",
+            "to": "B2",
+            "lanes": 2
+        },
+        {
+            "from": "B2",
+            "to": "B1",
+            "lanes": 2
+        },
+        {
+            "from": "B2",
+            "to": "B3",
+            "lanes": 2
+        },
+        {
+            "from": "B3",
+            "to": "B2",
+            "lanes": 2
+        },
+        {
+            "from": "C1",
+            "to": "C2",
+            "lanes": 2
+        },
+        {
+            "from": "C2",
+            "to": "C1",
+            "lanes": 2
+        },
+        {
+            "from": "C2",
+            "to": "C3",
+            "lanes": 2
+        },
+        {
+            "from": "C3",
+            "to": "C2",
+            "lanes": 2
+        },
+        {
+            "from": "A1",
+            "to": "B1",
+            "lanes": 2
+        },
+        {
+            "from": "B1",
+            "to": "A1",
+            "lanes": 2
+        },
+        {
+            "from": "B1",
+            "to": "C1",
+            "lanes": 2
+        },
+        {
+            "from": "C1",
+            "to": "B1",
+            "lanes": 2
+        },
+        {
+            "from": "A2",
+            "to": "B2",
+            "lanes": 2
+        },
+        {
+            "from": "B2",
+            "to": "A2",
+            "lanes": 2
+        },
+        {
+            "from": "B2",
+            "to": "C2",
+            "lanes": 2
+        },
+        {
+            "from": "C2",
+            "to": "B2",
+            "lanes": 2
+        },
+        {
+            "from": "A3",
+            "to": "B3",
+            "lanes": 2
+        },
+        {
+            "from": "B3",
+            "to": "A3",
+            "lanes": 2
+        },
+        {
+            "from": "B3",
+            "to": "C3",
+            "lanes": 2
+        },
+        {
+            "from": "C3",
+            "to": "B3",
+            "lanes": 2
+        }
+    ],
+    "traffic_patterns": {
+        "spawn_rate": 0.08,
+        "green_duration": 35,
+        "yellow_duration": 5
+    }
+}

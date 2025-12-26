@@ -1,0 +1,179 @@
+{
+    "name": "Shibuya Crossing (Tokyo)",
+    "description": "The famous scramble crossing in Tokyo with heavy traffic flow from multiple directions.",
+    "intersections": [
+        {
+            "id": "center",
+            "x": 400,
+            "y": 300,
+            "type": "scramble"
+        },
+        {
+            "id": "north_1",
+            "x": 400,
+            "y": 150,
+            "type": "signalized"
+        },
+        {
+            "id": "north_2",
+            "x": 400,
+            "y": 50,
+            "type": "source"
+        },
+        {
+            "id": "east_1",
+            "x": 600,
+            "y": 300,
+            "type": "signalized"
+        },
+        {
+            "id": "east_2",
+            "x": 750,
+            "y": 300,
+            "type": "source"
+        },
+        {
+            "id": "south_1",
+            "x": 400,
+            "y": 450,
+            "type": "signalized"
+        },
+        {
+            "id": "south_2",
+            "x": 400,
+            "y": 550,
+            "type": "source"
+        },
+        {
+            "id": "west_1",
+            "x": 200,
+            "y": 300,
+            "type": "signalized"
+        },
+        {
+            "id": "west_2",
+            "x": 50,
+            "y": 300,
+            "type": "source"
+        },
+        {
+            "id": "diag_ne",
+            "x": 600,
+            "y": 100,
+            "type": "source"
+        },
+        {
+            "id": "diag_sw",
+            "x": 200,
+            "y": 500,
+            "type": "source"
+        }
+    ],
+    "roads": [
+        {
+            "from": "north_2",
+            "to": "north_1",
+            "lanes": 3
+        },
+        {
+            "from": "north_1",
+            "to": "center",
+            "lanes": 3
+        },
+        {
+            "from": "center",
+            "to": "north_1",
+            "lanes": 3
+        },
+        {
+            "from": "north_1",
+            "to": "north_2",
+            "lanes": 3
+        },
+        {
+            "from": "east_2",
+            "to": "east_1",
+            "lanes": 3
+        },
+        {
+            "from": "east_1",
+            "to": "center",
+            "lanes": 3
+        },
+        {
+            "from": "center",
+            "to": "east_1",
+            "lanes": 3
+        },
+        {
+            "from": "east_1",
+            "to": "east_2",
+            "lanes": 3
+        },
+        {
+            "from": "south_2",
+            "to": "south_1",
+            "lanes": 3
+        },
+        {
+            "from": "south_1",
+            "to": "center",
+            "lanes": 3
+        },
+        {
+            "from": "center",
+            "to": "south_1",
+            "lanes": 3
+        },
+        {
+            "from": "south_1",
+            "to": "south_2",
+            "lanes": 3
+        },
+        {
+            "from": "west_2",
+            "to": "west_1",
+            "lanes": 3
+        },
+        {
+            "from": "west_1",
+            "to": "center",
+            "lanes": 3
+        },
+        {
+            "from": "center",
+            "to": "west_1",
+            "lanes": 3
+        },
+        {
+            "from": "west_1",
+            "to": "west_2",
+            "lanes": 3
+        },
+        {
+            "from": "diag_ne",
+            "to": "center",
+            "lanes": 2
+        },
+        {
+            "from": "center",
+            "to": "diag_ne",
+            "lanes": 2
+        },
+        {
+            "from": "diag_sw",
+            "to": "center",
+            "lanes": 2
+        },
+        {
+            "from": "center",
+            "to": "diag_sw",
+            "lanes": 2
+        }
+    ],
+    "traffic_patterns": {
+        "spawn_rate": 0.12,
+        "green_duration": 45,
+        "yellow_duration": 5
+    }
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>How to Use | UrbanFlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body>
+    <div id="page-entry-overlay"></div>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('page-entry-overlay').classList.add('loaded');
+            }, 100);
+        });
+    </script>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-area">
+                    <h1><img src="{{ url_for('static', path='images/logo.png') }}" alt="UrbanFlow Logo"
+                            style="height: 28px; width: auto; margin-right: 10px; filter: invert(1);"> UrbanFlow</h1>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    User Guide
+                </div>
+            </div>
+
+            <nav class="top-nav">
+                <a href="{{ url_for('read_index') }}" class="nav-item">Overview</a>
+                <a href="{{ url_for('read_simulation') }}" class="nav-item">Simulation</a>
+                <a href="{{ url_for('read_data') }}" class="nav-item">Analytics</a>
+                <a href="{{ url_for('read_config') }}" class="nav-item">Configuration</a>
+                <a href="{{ url_for('read_docs') }}" class="nav-item">Documentation</a>
+                <a href="{{ url_for('read_usage') }}" class="nav-item active">User Guide</a>
+
+                <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
+                    style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-primary); margin-left: 0.5rem;">☀️</button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="view-container" style="padding: 2rem; max-width: 1400px; margin: 0 auto; width: 100%;">
+                <h1 style="font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 600;">
+                    How to Use UrbanFlow
+                </h1>
+                <p
+                    style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 3rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 2rem;">
+                    A quick start guide to operating the simulation and interpreting real-time data.
+                </p>
+
+                <div style="display: grid; gap: 2rem;">
+                    <section class="glass-panel">
+                        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                            <div
+                                style="background: var(--accent-primary); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
+                                1</div>
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Choose Your Map</h3>
+                                <p style="margin-bottom: 0.5rem;">You have three ways to set up the city:</p>
+                                <ul
+                                    style="margin-top: 0.5rem; margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.6;">
+                                    <li><strong>Real World Map:</strong> Click "Select Area" to choose a real-world
+                                        location using the interactive map.</li>
+                                    <li><strong>City Layouts:</strong> Select a preset like Manhattan or Roundabout from
+                                        the dropdown.</li>
+                                    <li><strong>Grid Generator:</strong> Use the sliders to create a custom grid of any
+                                        size.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="glass-panel">
+                        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                            <div
+                                style="background: var(--text-tertiary); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
+                                2</div>
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Control Simulation</h3>
+                                <p>Use the control panel on the right sidebar:</p>
+                                <ul
+                                    style="margin-top: 0.5rem; margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.6;">
+                                    <li><strong>Start/Halt:</strong> Begin or pause the simulation.</li>
+                                    <li><strong>Reset:</strong> Clear all vehicles (keeps the map).</li>
+                                    <li><strong>Spawn Rate:</strong> Adjust how frequently new cars appear.</li>
+                                    <li><strong>Light Timing:</strong> Speed up or slow down traffic light cycles.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="glass-panel">
+                        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                            <div
+                                style="background: var(--text-tertiary); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
+                                3</div>
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Analyze Data</h3>
+                                <p>Monitor real-time telemetry in the sidebar or switch to the
+                                    <strong>Analytics</strong> tab for detailed breakdowns:
+                                </p>
+                                <ul
+                                    style="margin-top: 0.5rem; margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.6;">
+                                    <li><strong>Flow Rate:</strong> Vehicles per tick passing through the system.</li>
+                                    <li><strong>Avg Speed:</strong> Global average velocity of all active cars.</li>
+                                    <li><strong>Density:</strong> Current congestion levels.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div style="margin-top: 4rem; text-align: center;">
+                    <a href="{{ url_for('read_simulation') }}" class="cyber-btn"
+                        style="text-decoration: none; display: inline-block; padding: 1rem 3rem;">
+                        Start Experimenting &rarr;
+                    </a>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', path='js/theme.js') }}"></script>
+</body>
+
+</html>

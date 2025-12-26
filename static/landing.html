@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanFlow | Dynamics Lab</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body class="landing-body">
+    <nav class="landing-nav">
+        <div class="nav-logo">
+            <img src="{{ url_for('static', path='images/logo.png') }}" alt="UrbanFlow Logo" class="logo-icon"
+                style="height: 32px; width: auto; filter: invert(1);"> UrbanFlow
+        </div>
+        <div class="nav-cta-container">
+            <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
+                style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; padding: 0.5rem; margin-right: 0.5rem;">☀️</button>
+            <a href="{{ url_for('read_usage') }}" class="nav-btn">How to Use</a>
+        </div>
+    </nav>
+    <script src="{{ url_for('static', path='js/theme.js') }}"></script>
+
+    <div class="hero-section">
+        <div
+            style="background: rgba(255,255,255,0.05); padding: 0.5rem 1rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem; font-size: 0.9rem; letter-spacing: 0.05em; color: var(--text-secondary); opacity: 0; animation: fadeInUp 1s ease-out forwards 0s;">
+            RESEARCH LAB v1.0
+        </div>
+
+        <h1 class="hero-title">UrbanFlow<br>Dynamics</h1>
+        <p class="hero-subtitle">
+            An advanced traffic dynamics laboratory powered by the Nagel-Schreckenberg cellular automata model. Analyze
+            flow, congestion, and emergent system behavior in real-time.
+        </p>
+
+        <a href="{{ url_for('read_index') }}" class="cta-button">Enter Research Lab</a>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">∑</div>
+                <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;">Mathematical
+                    Core</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+                    Built on physically rigorous stochastic models to accurately simulate driver behavior and phase
+                    transitions.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;">Real-time
+                    Telemetry</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+                    Live streaming of flow rate, density, and velocity data via high-performance WebSockets.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⌬</div>
+                <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;">Emergent
+                    Dynamics</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+                    Observe "phantom traffic jams" and other non-linear phenomena emerge naturally from local
+                    interaction rules.
+                </p>
+            </div>
+        </div>
+
+        <footer style="margin-top: auto; padding-top: 4rem; color: var(--text-tertiary); font-size: 0.8rem;">
+            &copy; 2025 UrbanFlow Research Group. All systems normal.
+        </footer>
+    </div>
+
+    <div id="transition-overlay">
+    </div>
+
+    <script>
+        document.querySelector('.cta-button').addEventListener('click', function (e) {
+            e.preventDefault();
+            const overlay = document.getElementById('transition-overlay');
+            const targetUrl = this.href;
+
+            overlay.innerHTML = '<div class="traffic-system"></div>';
+            const system = overlay.querySelector('.traffic-system');
+
+            setTimeout(() => {
+                overlay.classList.add('active');
+            }, 50);
+
+            const hRoadsY = [30, 70];
+            const vRoadsX = [30, 70];
+
+            hRoadsY.forEach(top => {
+                const road = document.createElement('div');
+                road.className = 'road road-h';
+                road.style.top = `calc(${top}% - 40px)`;
+                road.innerHTML = '<div class="lane-marker"></div>';
+                system.appendChild(road);
+            });
+
+            vRoadsX.forEach(left => {
+                const road = document.createElement('div');
+                road.className = 'road road-v';
+                road.style.left = `calc(${left}% - 40px)`;
+                road.innerHTML = '<div class="lane-marker"></div>';
+                system.appendChild(road);
+            });
+
+            hRoadsY.forEach(top => {
+                vRoadsX.forEach(left => {
+                    const signals = [
+                        { dx: -50, dy: -50 }, { dx: 35, dy: -50 },
+                        { dx: -50, dy: 35 }, { dx: 35, dy: 35 }
+                    ];
+
+                    signals.forEach((sig, index) => {
+                        const signal = document.createElement('div');
+                        signal.className = 'signal';
+                        signal.style.top = `calc(${top}% + ${sig.dy}px)`;
+                        signal.style.left = `calc(${left}% + ${sig.dx}px)`;
+
+                        signal.style.animation = `signalPulse 4s infinite ${index % 2 === 0 ? 0 : 2}s`;
+                        system.appendChild(signal);
+                    });
+                });
+            });
+
+            hRoadsY.forEach((top, rIdx) => {
+                const roadCenter = top;
+                for (let i = 0; i < 6; i++) {
+                    createVehicle(system, 'h', roadCenter, false);
+                    createVehicle(system, 'h', roadCenter, true);
+                }
+            });
+
+            vRoadsX.forEach((left, rIdx) => {
+                const roadCenter = left;
+                for (let i = 0; i < 6; i++) {
+                    createVehicle(system, 'v', roadCenter, false);
+                    createVehicle(system, 'v', roadCenter, true);
+                }
+            });
+
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 3000);
+        });
+
+        function createVehicle(container, type, axisPos, isReverse) {
+            const vehicle = document.createElement('div');
+            vehicle.className = `vehicle vehicle-${type} ${isReverse ? 'reverse' : ''}`;
+
+            const duration = 2 + Math.random() * 2;
+            const delay = Math.random() * 2;
+
+            if (type === 'h') {
+                vehicle.style.top = `calc(${axisPos}% + ${isReverse ? 10 : -34}px)`;
+                vehicle.style.animation = `${isReverse ? 'driveLeft' : 'driveRight'} ${duration}s linear infinite ${delay}s`;
+            } else {
+                vehicle.style.left = `calc(${axisPos}% + ${isReverse ? 10 : -34}px)`;
+                vehicle.style.animation = `${isReverse ? 'driveUp' : 'driveDown'} ${duration}s linear infinite ${delay}s`;
+            }
+
+            container.appendChild(vehicle);
+        }
+    </script>
+</body>
+
+</html>
