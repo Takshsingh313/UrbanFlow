@@ -17,7 +17,7 @@ from backend.model import SimulationModel
 from backend.map_loader import CityMapLoader
 from backend.osm_generator import OSMGenerator
 
-app = FastAPI()
+app = FastAPI(docs_url="/api/docs", redoc_url=None)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
