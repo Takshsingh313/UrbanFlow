@@ -21,7 +21,7 @@
         <header class="app-header">
             <div class="header-left">
                 <div class="logo-area">
-                    <h1><img src="{{ url_for('static', path='images/logo.png') }}" alt="UrbanFlow Logo"
+                    <h1><img src="/static/images/logo.png" alt="UrbanFlow Logo"
                             style="height: 28px; width: auto; margin-right: 10px; filter: invert(1);"> UrbanFlow</h1>
                 </div>
                 <div class="status-indicator">
@@ -31,11 +31,11 @@
             </div>
 
             <nav class="top-nav">
-                <a href="{{ url_for('read_index') }}" class="nav-item">Overview</a>
-                <a href="{{ url_for('read_simulation') }}" class="nav-item active">Simulation</a>
-                <a href="{{ url_for('read_data') }}" class="nav-item">Analytics</a>
-                <a href="{{ url_for('read_config') }}" class="nav-item">Configuration</a>
-                <a href="{{ url_for('read_docs') }}" class="nav-item">Documentation</a>
+                <a href="/index" class="nav-item">Overview</a>
+                <a href="/simulation" class="nav-item active">Simulation</a>
+                <a href="/data" class="nav-item">Analytics</a>
+                <a href="/config" class="nav-item">Configuration</a>
+                <a href="/docs" class="nav-item">Documentation</a>
 
                 <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
                     style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-primary); margin-left: 0.5rem;">☀️</button>
@@ -78,8 +78,7 @@
             <div id="simulation-workspace" class="view-container"
                 style="display: none; padding: 2rem; max-width: 1400px; margin: 0 auto; width: 100%; flex-direction: column; gap: 2rem; padding-bottom: 3rem;">
 
-                <button
-                    onclick="sessionStorage.removeItem('urbanflow_mode'); window.location.href='{{ url_for('read_index') }}'"
+                <button onclick="sessionStorage.removeItem('urbanflow_mode'); window.location.href='/index'"
                     style="background: none; border: none; color: var(--text-tertiary); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; align-self: flex-start; margin-bottom: -1rem; z-index: 10;">
                     &larr; Back to Dashboard
                 </button>
@@ -263,10 +262,10 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="{{ url_for('static', path='js/visualizer.js') }}"></script>
-    <script src="{{ url_for('static', path='js/charts.js') }}"></script>
-    <script src="{{ url_for('static', path='js/main.js') }}"></script>
-    <script src="{{ url_for('static', path='js/theme.js') }}"></script>
+    <script src="/static/js/visualizer.js"></script>
+    <script src="/static/js/charts.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/theme.js"></script>
 </body>
 
 </html>

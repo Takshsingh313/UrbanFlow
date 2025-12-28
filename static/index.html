@@ -20,7 +20,7 @@
         <header class="app-header">
             <div class="header-left">
                 <div class="logo-area">
-                    <h1><img src="{{ url_for('static', path='images/logo.png') }}" alt="UrbanFlow Logo"
+                    <h1><img src="/static/images/logo.png" alt="UrbanFlow Logo"
                             style="height: 28px; width: auto; margin-right: 10px; filter: invert(1);"> UrbanFlow</h1>
                 </div>
                 <div class="status-indicator">
@@ -30,11 +30,11 @@
             </div>
 
             <nav class="top-nav">
-                <a href="{{ url_for('read_index') }}" class="nav-item active">Overview</a>
-                <a href="{{ url_for('read_simulation') }}" class="nav-item">Simulation</a>
-                <a href="{{ url_for('read_data') }}" class="nav-item">Analytics</a>
-                <a href="{{ url_for('read_config') }}" class="nav-item">Configuration</a>
-                <a href="{{ url_for('read_docs') }}" class="nav-item">Documentation</a>
+                <a href="/index" class="nav-item active">Overview</a>
+                <a href="/simulation" class="nav-item">Simulation</a>
+                <a href="/data" class="nav-item">Analytics</a>
+                <a href="/config" class="nav-item">Configuration</a>
+                <a href="/docs" class="nav-item">Documentation</a>
 
                 <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
                     style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-primary); margin-left: 0.5rem;">☀️</button>
@@ -92,7 +92,7 @@
                                 controlled experiments.
                             </p>
                         </div>
-                        <a href="{{ url_for('read_simulation') }}?mode=manual" class="cyber-btn"
+                        <a href="/simulation?mode=manual" class="cyber-btn"
                             style="text-decoration: none; text-align: center; font-size: 1.1rem; padding: 1rem;">Enter
                             Simulation &rarr;</a>
                     </div>
@@ -108,7 +108,7 @@
                                 Earth.
                             </p>
                         </div>
-                        <a href="{{ url_for('read_simulation') }}?mode=realworld" class="cyber-btn"
+                        <a href="/simulation?mode=realworld" class="cyber-btn"
                             style="text-decoration: none; text-align: center; font-size: 1.1rem; padding: 1rem;">Enter
                             Simulation &rarr;</a>
                     </div>
@@ -116,7 +116,7 @@
             </div>
         </main>
     </div>
-    <script src="{{ url_for('static', path='js/theme.js') }}"></script>
+    <script src="/static/js/theme.js"></script>
 </body>
 
 </html>

@@ -11,16 +11,16 @@
 <body class="landing-body">
     <nav class="landing-nav">
         <div class="nav-logo">
-            <img src="{{ url_for('static', path='images/logo.png') }}" alt="UrbanFlow Logo" class="logo-icon"
+            <img src="/static/images/logo.png" alt="UrbanFlow Logo" class="logo-icon"
                 style="height: 32px; width: auto; filter: invert(1);"> UrbanFlow
         </div>
         <div class="nav-cta-container">
             <button id="theme-toggle" onclick="toggleTheme()" class="nav-btn"
                 style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; padding: 0.5rem; margin-right: 0.5rem;">☀️</button>
-            <a href="{{ url_for('read_usage') }}" class="nav-btn">How to Use</a>
+            <a href="/usage" class="nav-btn">How to Use</a>
         </div>
     </nav>
-    <script src="{{ url_for('static', path='js/theme.js') }}"></script>
+    <script src="/static/js/theme.js"></script>
 
     <div class="hero-section">
         <div
@@ -34,7 +34,7 @@
             flow, congestion, and emergent system behavior in real-time.
         </p>
 
-        <a href="{{ url_for('read_index') }}" class="cta-button">Enter Research Lab</a>
+        <a href="/index" class="cta-button">Enter Research Lab</a>
 
         <div class="features-grid">
             <div class="feature-card">
